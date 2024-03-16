@@ -1,54 +1,67 @@
-import { QueryProps } from "@/containers/claim/types";
+import { SUBGRAPH_ENDPOINT } from "@/constants";
+import { QueryProps } from "@/containers/claim.old/types";
+import { ClientContext, GraphQLClient } from "graphql-hooks";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 
 const ClaimComponent = dynamic(
-  () => import("@/containers/claim").then((res) => res.default),
-  {
-    ssr: false,
-  }
+    () => import("@/containers/claim").then((res) => res.default),
+    {
+        ssr: false,
+    }
 );
 
 const ClaimPage = () => {
-  const router = useRouter();
+    const router = useRouter();
 
-  useEffect(() => {
-    localStorage.removeItem("openlogin_store");
-    localStorage.removeItem("Web3Auth-cachedAdapter");
-  }, []);
+    const client = new GraphQLClient({
+        url: SUBGRAPH_ENDPOINT,
+    });
 
-  const [query, setQuery] = useState<QueryProps>({
-    firstname: "",
-    lastname: "",
-    eventname: "",
-    batchid: "",
-    emailid: "",
-  });
+    useEffect(() => {
+        localStorage.removeItem("openlogin_store");
+        localStorage.removeItem("Web3Auth-cachedAdapter");
+    }, []);
 
-  const checkQueryValidity = (query: QueryProps) => {
-    const { firstname, lastname, eventname, batchid, emailid } = query;
-    if (!firstname || !lastname || !eventname || !batchid || !emailid) {
-      return false;
-    }
-    return true;
-  };
+    const [query, setQuery] = useState<QueryProps>({
+        firstname: "",
+        lastname: "",
+        eventname: "",
+        batchid: "",
+        emailid: "",
+    });
 
-  useEffect(() => {
-    const query = router.query;
+    const checkQueryValidity = (query: QueryProps) => {
+        const { firstname, lastname, eventname, batchid, emailid } = query;
+        if (!firstname || !lastname || !eventname || !batchid || !emailid) {
+            return false;
+        }
+        return true;
+    };
 
-    if (query) {
-      setQuery({
-        firstname: query.firstname as string,
-        lastname: query.lastname as string,
-        emailid: query.emailid as string,
-        batchid: query.batchid as string,
-        eventname: query.eventname as string,
-      });
-    }
-  }, [router.query]);
+    useEffect(() => {
+        const query = router.query;
 
-  return <ClaimComponent query={query} noClaim={!checkQueryValidity(query)} />;
+        if (query) {
+            setQuery({
+                firstname: query.firstname as string,
+                lastname: query.lastname as string,
+                emailid: query.emailid as string,
+                batchid: query.batchid as string,
+                eventname: query.eventname as string,
+            });
+        }
+    }, [router.query]);
+
+    return (
+        <ClientContext.Provider value={client}>
+            <ClaimComponent
+                query={query}
+                noClaim={!checkQueryValidity(query)}
+            />
+        </ClientContext.Provider>
+    );
 };
 
 export default ClaimPage;

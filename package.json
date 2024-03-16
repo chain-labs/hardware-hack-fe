@@ -21,6 +21,7 @@
     "axios": "^1.6.2",
     "ethers": "5",
     "graphql": "^16.8.1",
+    "graphql-hooks": "^7.0.0",
     "merkletreejs": "^0.3.11",
     "next": "14.0.4",
     "next-redux-wrapper": "^8.1.0",
