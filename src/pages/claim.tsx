@@ -1,5 +1,5 @@
 import { SUBGRAPH_ENDPOINT } from "@/constants";
-import { QueryProps } from "@/containers/claim.old/types";
+import { QueryProps } from "@/containers/claim/types";
 import { ClientContext, GraphQLClient } from "graphql-hooks";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";

@@ -9,7 +9,7 @@ import {
 import "react-toastify/dist/ReactToastify.css";
 import { Web3Auth, Web3AuthOptions } from "@web3auth/modal";
 import React, { useEffect, useState } from "react";
-import { QueryProps } from "../claim.old/types";
+import { QueryProps } from "../claim/types";
 import {
     BiconomySmartAccountV2,
     DEFAULT_ENTRYPOINT_ADDRESS,

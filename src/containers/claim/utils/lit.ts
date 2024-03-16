@@ -2,7 +2,7 @@ import { client } from "@/components/ApolloClient";
 import { NFT_ADDRESS, SIMPLR_ADDRESS, TEST_NETWORK, chain } from "@/constants";
 import { FETCH_EVENT_OWNER_QUERY } from "@/graphql/query/fetchEventOwnerAddress";
 import LitJsSdk from "@lit-protocol/sdk-browser";
-import { QueryProps } from "../../claim.old/types";
+import { QueryProps } from "../../claim/types";
 import { pinFile, pinJson } from "./pinata";
 
 export const getAccessControlConditions = (addresses: string[]) => {
