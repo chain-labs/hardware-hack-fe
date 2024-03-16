@@ -14,11 +14,7 @@ import {
     BiconomySmartAccountV2,
     DEFAULT_ENTRYPOINT_ADDRESS,
 } from "@biconomy/account";
-import {
-    FETCH_TREE_CID,
-    getMerkleHashes,
-    hashQueryData,
-} from "../claim.old/utils/hash";
+import { FETCH_TREE_CID, getMerkleHashes, hashQueryData } from "./utils/hash";
 import { BigNumber, ethers } from "ethers";
 import MerkleTree from "merkletreejs";
 import {
@@ -26,10 +22,10 @@ import {
     ECDSAOwnershipValidationModule,
 } from "@biconomy/modules";
 import { ChainId } from "@biconomy/core-types";
-import bundler from "../claim.old/AccountAbstraction/bundler";
-import paymaster from "../claim.old/AccountAbstraction/paymaster";
+import bundler from "./AccountAbstraction/bundler";
+import paymaster from "./AccountAbstraction/paymaster";
 import { ToastContainer, toast } from "react-toastify";
-import { handleEncryptandPin } from "../claim.old/utils/lit";
+import { handleEncryptandPin } from "./utils/lit";
 
 import contracts from "@/contracts.json";
 import {
